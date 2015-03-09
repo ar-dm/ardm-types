@@ -3,7 +3,7 @@ require 'spec_helper'
 try_spec do
   describe DataMapper::Property::Csv do
     supported_by :all do
-      before :all do
+      before do
         class ::User
           include DataMapper::Resource
           property :id, Serial
@@ -15,7 +15,7 @@ try_spec do
 
       describe '.load' do
         describe 'when argument is a comma separated string' do
-          before :all do
+          before do
             @input  = 'uno,due,tre'
             @result = @property.load(@input)
           end
@@ -26,7 +26,7 @@ try_spec do
         end
 
         describe 'when argument is an empty array' do
-          before :all do
+          before do
             @input    = []
             @result   = @property.load(@input)
           end
@@ -37,7 +37,7 @@ try_spec do
         end
 
         describe 'when argument is an empty hash' do
-          before :all do
+          before do
             @input    = {}
             @result   = @property.load(@input)
           end
@@ -48,7 +48,7 @@ try_spec do
         end
 
         describe 'when argument is nil' do
-          before :all do
+          before do
             @input    = nil
             @result   = @property.load(@input)
           end
@@ -59,7 +59,7 @@ try_spec do
         end
 
         describe 'when argument is an integer' do
-          before :all do
+          before do
             @input    = 7
             @result   = @property.load(@input)
           end
@@ -70,7 +70,7 @@ try_spec do
         end
 
         describe 'when argument is a float' do
-          before :all do
+          before do
             @input    = 7.0
             @result   = @property.load(@input)
           end
@@ -81,7 +81,7 @@ try_spec do
         end
 
         describe 'when argument is an array' do
-          before :all do
+          before do
             @input  = [ 1, 2, 3 ]
             @result = @property.load(@input)
           end
@@ -94,7 +94,7 @@ try_spec do
 
       describe '.dump' do
         describe 'when value is a list of lists' do
-          before :all do
+          before do
             @input  = [ %w[ uno due tre ], %w[ uno dos tres ] ]
             @result = @property.dump(@input)
           end
@@ -105,7 +105,7 @@ try_spec do
         end
 
         describe 'when value is a string' do
-          before :all do
+          before do
             @input  = 'beauty hides in the deep'
             @result = @property.dump(@input)
           end
@@ -116,7 +116,7 @@ try_spec do
         end
 
         describe 'when value is nil' do
-          before :all do
+          before do
             @input  = nil
             @result = @property.dump(@input)
           end
@@ -127,7 +127,7 @@ try_spec do
         end
 
         describe 'when value is a hash' do
-          before :all do
+          before do
             @input  = { :library => 'DataMapper', :language => 'Ruby' }
             @result = @property.dump(@input)
           end

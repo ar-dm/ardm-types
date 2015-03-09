@@ -2,7 +2,7 @@ require 'spec_helper'
 
 try_spec do
   describe DataMapper::Property::Enum do
-    before :all do
+    before do
       class ::User
         include DataMapper::Resource
         property :id, Serial
@@ -11,7 +11,7 @@ try_spec do
       @property_klass = DataMapper::Property::Enum
     end
 
-    it_should_behave_like "A property with flags"
+    include_examples "A property with flags"
 
     describe '.dump' do
       before do
@@ -51,7 +51,7 @@ try_spec do
 
     describe '.typecast' do
       describe 'of Enum created from a symbol' do
-        before :all do
+        before do
           @enum = User.property(:enum, DataMapper::Property::Enum, :flags => [:uno])
         end
 
@@ -75,7 +75,7 @@ try_spec do
       end
 
       describe 'of Enum created from integer list' do
-        before :all do
+        before do
           @enum = User.property(:enum, DataMapper::Property::Enum, :flags => [1, 2, 3])
         end
 
@@ -99,7 +99,7 @@ try_spec do
       end
 
       describe 'of Enum created from a string' do
-        before :all do
+        before do
           @enum = User.property(:enum, DataMapper::Property::Enum, :flags => ['uno'])
         end
 

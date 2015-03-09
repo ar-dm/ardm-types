@@ -6,7 +6,7 @@ try_spec do
 
   describe DataMapper::TypesFixtures::Person do
     supported_by :all do
-      before :all  do
+      before do
         @resource  = DataMapper::TypesFixtures::Person.create(:password => 'DataMapper R0cks!')
         DataMapper::TypesFixtures::Person.create(:password => 'password1')
 

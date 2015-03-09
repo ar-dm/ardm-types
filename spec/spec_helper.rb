@@ -1,3 +1,5 @@
+require 'rspec'
+
 require 'dm-core/spec/setup'
 require 'dm-core/spec/lib/adapter_helpers'
 
@@ -9,7 +11,7 @@ Dir["#{Pathname(__FILE__).dirname.expand_path}/shared/*.rb"].each { |file| requi
 
 DataMapper::Spec.setup
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.extend(DataMapper::Spec::Adapters::Helpers)
 end
 

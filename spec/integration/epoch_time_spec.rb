@@ -6,12 +6,12 @@ try_spec do
 
   describe DataMapper::TypesFixtures::Person do
     supported_by :all do
-      before :all do
+      before do
         @resource = DataMapper::TypesFixtures::Person.new(:name => '')
       end
 
       describe 'with a birthday' do
-        before :all do
+        before do
           @resource.birthday = '1983-05-03'
         end
 
@@ -22,7 +22,7 @@ try_spec do
         end
 
         describe 'when dumped and loaded again' do
-          before :all do
+          before do
             @resource.save.should be(true)
             @resource.reload
           end
@@ -34,7 +34,7 @@ try_spec do
       end
 
       describe 'without a birthday' do
-        before :all do
+        before do
           @resource.birthday = nil
         end
 
@@ -45,7 +45,7 @@ try_spec do
         end
 
         describe 'when dumped and loaded again' do
-          before :all do
+          before do
             @resource.save.should be(true)
             @resource.reload
           end

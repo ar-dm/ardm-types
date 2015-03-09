@@ -75,7 +75,7 @@ try_spec do
           @result = 15
         end
 
-        it_should_behave_like 'identity function'
+        include_examples 'identity function'
       end
 
       describe 'given an Array instance' do
@@ -84,7 +84,7 @@ try_spec do
           @result = ['dm-core', 'dm-more']
         end
 
-        it_should_behave_like 'identity function'
+        include_examples 'identity function'
       end
 
       describe 'given a Hash instance' do
@@ -93,7 +93,7 @@ try_spec do
           @result = { :format => 'yaml' }
         end
 
-        it_should_behave_like 'identity function'
+        include_examples 'identity function'
       end
 
       describe 'given a plain old Ruby object' do
@@ -104,7 +104,7 @@ try_spec do
           @result = @input
         end
 
-        it_should_behave_like 'identity function'
+        include_examples 'identity function'
       end
     end
   end

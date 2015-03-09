@@ -2,7 +2,7 @@ require 'spec_helper'
 
 try_spec do
   describe DataMapper::Property::BCryptHash do
-    before :all do
+    before do
       @clear_password   = 'DataMapper R0cks!'
       @crypted_password = BCrypt::Password.create(@clear_password)
 
@@ -25,7 +25,7 @@ try_spec do
 
     describe '.dump' do
       describe 'when argument is a string' do
-        before :all do
+        before do
           @input  = 'DataMapper'
           @result = @bcrypt_hash.dump(@input)
         end
@@ -40,7 +40,7 @@ try_spec do
       end
 
       describe 'when argument is nil' do
-        before :all do
+        before do
           @input  = nil
           @result = @bcrypt_hash.dump(@input)
         end
@@ -53,7 +53,7 @@ try_spec do
 
     describe '.load' do
       describe 'when argument is a string' do
-        before :all do
+        before do
           @input  = 'DataMapper'
           @result = @bcrypt_hash.load(@crypted_password)
         end
@@ -68,7 +68,7 @@ try_spec do
       end
 
       describe 'when argument is nil' do
-        before :all do
+        before do
           @input  = nil
           @result = @bcrypt_hash.load(@input)
         end
@@ -81,7 +81,7 @@ try_spec do
 
     describe '.typecast' do
       describe 'when argument is a string' do
-        before :all do
+        before do
           @input  = 'bcrypt hash'
           @result = @bcrypt_hash.typecast(@input)
         end
@@ -96,7 +96,7 @@ try_spec do
       end
 
       describe 'when argument is a blank string' do
-        before :all do
+        before do
           @input  = ''
           @result = @bcrypt_hash.typecast(@input)
         end
@@ -111,7 +111,7 @@ try_spec do
       end
 
       describe 'when argument is integer' do
-        before :all do
+        before do
           @input  = 2249
           @result = @bcrypt_hash.typecast(@input)
         end
@@ -126,7 +126,7 @@ try_spec do
       end
 
       describe 'when argument is hash' do
-        before :all do
+        before do
           @input  = { :cryptic => 'obscure' }
           @result = @bcrypt_hash.typecast(@input)
         end
@@ -141,7 +141,7 @@ try_spec do
       end
 
       describe 'when argument is nil' do
-        before :all do
+        before do
           @input  = nil
           @result = @bcrypt_hash.typecast(@input)
         end

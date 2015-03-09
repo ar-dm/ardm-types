@@ -7,17 +7,17 @@ try_spec do
 
   describe DataMapper::TypesFixtures::Person do
     supported_by :all do
-      before :all do
+      before do
         @resource = DataMapper::TypesFixtures::Person.new(:name => '')
       end
 
       describe 'with no inventions information' do
-        before :all do
+        before do
           @resource.inventions = nil
         end
 
         describe 'when dumped and loaded again' do
-          before :all do
+          before do
             @resource.save.should be(true)
             @resource.reload
           end
@@ -29,7 +29,7 @@ try_spec do
       end
 
       describe 'with a few items on the inventions list' do
-        before :all do
+        before do
           @input = [ 'carbon telephone transmitter', 'light bulb', 'electric grid' ].map do |name|
             DataMapper::TypesFixtures::Invention.new(name)
           end
@@ -37,7 +37,7 @@ try_spec do
         end
 
         describe 'when dumped and loaded again' do
-          before :all do
+          before do
             @resource.save.should be(true)
             @resource.reload
           end
@@ -49,12 +49,12 @@ try_spec do
       end
 
       describe 'with inventions information given as empty list' do
-        before :all do
+        before do
           @resource.inventions = []
         end
 
         describe 'when dumped and loaded again' do
-          before :all do
+          before do
             @resource.save.should be(true)
             @resource.reload
           end

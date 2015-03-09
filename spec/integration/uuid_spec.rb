@@ -7,7 +7,7 @@ try_spec do
   describe DataMapper::TypesFixtures::NetworkNode do
     supported_by :all do
       describe 'with UUID set as UUID object' do
-        before :all do
+        before do
           @uuid_string = 'b0fc632e-d744-4821-afe3-4ea0701859ee'
           @uuid        = UUIDTools::UUID.parse(@uuid_string)
           @resource    = DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
@@ -16,7 +16,7 @@ try_spec do
         end
 
         describe 'when reloaded' do
-          before :all do
+          before do
             @resource.reload
           end
 
@@ -31,13 +31,13 @@ try_spec do
       end
 
       describe 'with UUID set as a valid UUID string' do
-        before :all do
+        before do
           @uuid  = 'b0fc632e-d744-4821-afe3-4ea0701859ee'
           @resource = DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
         end
 
         describe 'when reloaded' do
-          before :all do
+          before do
             @resource.reload
           end
 
@@ -52,7 +52,7 @@ try_spec do
       end
 
       describe 'with UUID set as invalid UUID string' do
-        before :all do
+        before do
           @uuid  = 'meh'
           @operation = lambda do
             DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
@@ -67,7 +67,7 @@ try_spec do
       end
 
       describe 'with UUID set as a blank string' do
-        before :all do
+        before do
           @uuid  = ''
           @operation = lambda do
             DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
@@ -82,13 +82,13 @@ try_spec do
       end
 
       describe 'with missing UUID' do
-        before :all do
+        before do
           @uuid  = nil
           @resource = DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
         end
 
         describe 'when reloaded' do
-          before :all do
+          before do
             @resource.reload
           end
 

@@ -12,7 +12,7 @@ try_spec do
         @property_klass = DataMapper::Property::Flag
       end
 
-    it_should_behave_like "A property with flags"
+    include_examples "A property with flags"
 
       describe 'when argument matches a value in the flag map' do
         before :all do
