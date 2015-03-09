@@ -15,12 +15,12 @@ try_spec do
             :status => 'confirmed'
           )
 
-          @resource.save.should be(true)
+          expect(@resource.save).to be(true)
           @resource.reload
         end
 
         it 'preserves property value' do
-          @resource.status.should == :confirmed
+          expect(@resource.status).to eq(:confirmed)
         end
       end
 
@@ -30,7 +30,7 @@ try_spec do
         end
 
         it 'typecasts it for outside reader' do
-          @resource.status.should == :assigned
+          expect(@resource.status).to eq(:assigned)
         end
       end
 
@@ -42,17 +42,17 @@ try_spec do
             :body   => "Note that at the very least, there should be a check to see whether or not the user is created before chown'ing a file to the user.",
             :status => 'confirmed'
           )
-          @resource.save.should be(true)
+          expect(@resource.save).to be(true)
         end
 
         it 'supports queries with equality operator on enumeration property' do
-          DataMapper::TypesFixtures::Ticket.all(:status => :confirmed).
-            should include(@resource)
+          expect(DataMapper::TypesFixtures::Ticket.all(:status => :confirmed)).
+            to include(@resource)
         end
 
         it 'supports queries with inequality operator on enumeration property' do
-          DataMapper::TypesFixtures::Ticket.all(:status.not => :confirmed).
-            should_not include(@resource)
+          expect(DataMapper::TypesFixtures::Ticket.all(:status.not => :confirmed)).
+            not_to include(@resource)
         end
       end
 
@@ -64,15 +64,15 @@ try_spec do
         # TODO: consider sharing shared spec exampels with dm-validations,
         #       which has 'invalid model' shared group
         it 'is invalid (auto validation for :within kicks in)' do
-          @resource.should_not be_valid
+          expect(@resource).not_to be_valid
         end
 
         it 'has errors' do
-          @resource.errors.should_not be_empty
+          expect(@resource.errors).not_to be_empty
         end
 
         it 'has a meaningful error message on invalid property' do
-          @resource.errors.on(:status).should include('Status must be one of unconfirmed, confirmed, assigned, resolved, not_applicable')
+          expect(@resource.errors.on(:status)).to include('Status must be one of unconfirmed, confirmed, assigned, resolved, not_applicable')
         end
       end
     end

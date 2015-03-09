@@ -9,24 +9,24 @@ try_spec do
     let(:uri)     { Addressable::URI.parse(uri_str)        }
     let(:uri_str) { 'http://example.com/path/to/resource/' }
 
-    it { should be_instance_of(described_class) }
+    it { is_expected.to be_instance_of(described_class) }
 
     describe '.dump' do
       context 'with an instance of Addressable::URI' do
         it 'returns the URI as a String' do
-          subject.dump(uri).should eql(uri_str)
+          expect(subject.dump(uri)).to eql(uri_str)
         end
       end
 
       context 'with nil' do
         it 'returns nil' do
-          subject.dump(nil).should be(nil)
+          expect(subject.dump(nil)).to be(nil)
         end
       end
 
       context 'with an empty string' do
         it 'returns an empty URI' do
-          subject.dump('').should eql('')
+          expect(subject.dump('')).to eql('')
         end
       end
     end
@@ -34,19 +34,19 @@ try_spec do
     describe '.load' do
       context 'with a string' do
         it 'returns the URI as an Addressable::URI' do
-          subject.load(uri_str).should eql(uri)
+          expect(subject.load(uri_str)).to eql(uri)
         end
       end
 
       context 'with nil' do
         it 'returns nil' do
-          subject.load(nil).should be(nil)
+          expect(subject.load(nil)).to be(nil)
         end
       end
 
       context 'with an empty string' do
         it 'returns an empty URI' do
-          subject.load('').should eql(Addressable::URI.parse(''))
+          expect(subject.load('')).to eql(Addressable::URI.parse(''))
         end
       end
 
@@ -55,7 +55,7 @@ try_spec do
         let(:uri)     { Addressable::URI.parse('http://www.example.com/') }
 
         it 'returns the URI as a normalized Addressable::URI' do
-          subject.load(uri_str).should eql(uri)
+          expect(subject.load(uri_str)).to eql(uri)
         end
       end
     end
@@ -63,19 +63,19 @@ try_spec do
     describe '.typecast' do
       context 'with an instance of Addressable::URI' do
         it 'does nothing' do
-          subject.typecast(uri).should eql(uri)
+          expect(subject.typecast(uri)).to eql(uri)
         end
       end
 
       context 'with a string' do
         it 'delegates to .load' do
-          subject.typecast(uri_str).should eql(uri)
+          expect(subject.typecast(uri_str)).to eql(uri)
         end
       end
 
       context 'with nil' do
         it 'returns nil' do
-          subject.typecast(nil).should be(nil)
+          expect(subject.typecast(nil)).to be(nil)
         end
       end
     end

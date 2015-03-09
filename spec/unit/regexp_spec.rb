@@ -20,7 +20,7 @@ try_spec do
         end
 
         it 'create a regexp instance from argument' do
-          @result.should == Regexp.new(@input)
+          expect(@result).to eq(Regexp.new(@input))
         end
       end
 
@@ -31,7 +31,7 @@ try_spec do
         end
 
         it 'returns nil' do
-          @result.should be_nil
+          expect(@result).to be_nil
         end
       end
     end
@@ -44,7 +44,7 @@ try_spec do
         end
 
         it 'escapes the argument' do
-          @result.should == '\\d+'
+          expect(@result).to eq('\\d+')
         end
       end
 
@@ -55,7 +55,7 @@ try_spec do
         end
 
         it 'returns nil' do
-          @result.should be_nil
+          expect(@result).to be_nil
         end
       end
     end

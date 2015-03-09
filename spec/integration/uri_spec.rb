@@ -19,14 +19,14 @@ try_spec do
       end
 
       before do
-        resource.should be_saved
+        expect(resource).to be_saved
       end
 
       context 'without URI' do
         let(:uri) { nil }
 
         it 'can be found by uri' do
-          DataMapper::TypesFixtures::Bookmark.first(:uri => uri).should eql(resource)
+          expect(DataMapper::TypesFixtures::Bookmark.first(:uri => uri)).to eql(resource)
         end
 
         describe 'when reloaded' do
@@ -35,7 +35,7 @@ try_spec do
           end
 
           it 'has no uri' do
-            resource.uri.should be(nil)
+            expect(resource.uri).to be(nil)
           end
         end
       end
@@ -44,7 +44,7 @@ try_spec do
         let(:uri) { '' }
 
         it 'can be found by uri' do
-          DataMapper::TypesFixtures::Bookmark.first(:uri => uri).should eql(resource)
+          expect(DataMapper::TypesFixtures::Bookmark.first(:uri => uri)).to eql(resource)
         end
 
         describe 'when reloaded' do
@@ -53,11 +53,11 @@ try_spec do
           end
 
           it 'is loaded as URI object' do
-            resource.uri.should be_an_instance_of(Addressable::URI)
+            expect(resource.uri).to be_an_instance_of(Addressable::URI)
           end
 
           it 'has the same original URI' do
-            resource.uri.to_s.should eql(uri)
+            expect(resource.uri.to_s).to eql(uri)
           end
         end
       end
@@ -66,7 +66,7 @@ try_spec do
         let(:uri) { 'this is def. not URI' }
 
         it 'is perfectly valid (URI type does not provide auto validations)' do
-          resource.save.should be(true)
+          expect(resource.save).to be(true)
         end
       end
 
@@ -98,7 +98,7 @@ try_spec do
           let(:uri) { uri }
 
           it 'can be found by uri' do
-            DataMapper::TypesFixtures::Bookmark.first(:uri => uri).should_not be(nil)
+            expect(DataMapper::TypesFixtures::Bookmark.first(:uri => uri)).not_to be(nil)
           end
 
           describe 'when reloaded' do
@@ -107,7 +107,7 @@ try_spec do
             end
 
             it 'matches a normalized form of the original URI' do
-              resource.uri.should eql(Addressable::URI.parse(uri).normalize)
+              expect(resource.uri).to eql(Addressable::URI.parse(uri).normalize)
             end
           end
         end

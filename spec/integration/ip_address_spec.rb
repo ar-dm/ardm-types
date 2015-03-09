@@ -29,12 +29,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv6 node' do
-            @resource.should run_ipv6
+            expect(@resource).to run_ipv6
           end
         end
       end
@@ -46,12 +46,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv4 node' do
-            @resource.should run_ipv4
+            expect(@resource).to run_ipv4
           end
         end
       end
@@ -63,12 +63,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv4 node' do
-            @resource.should run_ipv4
+            expect(@resource).to run_ipv4
           end
         end
       end
@@ -80,12 +80,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv4 node' do
-            @resource.should run_ipv4
+            expect(@resource).to run_ipv4
           end
         end
       end
@@ -97,12 +97,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv4 node' do
-            @resource.should run_ipv4
+            expect(@resource).to run_ipv4
           end
 
           it 'includes IP address 218.43.243.2 in subnet hosts' do
@@ -118,16 +118,16 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'is an IPv4 node' do
-            @resource.should run_ipv4
+            expect(@resource).to run_ipv4
           end
 
           it 'should be the expected value' do
-            @resource.ip_address.should == IPAddr.new('0.0.0.0')
+            expect(@resource.ip_address).to eq(IPAddr.new('0.0.0.0'))
           end
         end
       end
@@ -139,12 +139,12 @@ try_spec do
 
         describe 'when dumped and loaded' do
           before do
-            @resource.save.should be(true)
+            expect(@resource.save).to be(true)
             @resource.reload
           end
 
           it 'has no IP address assigned' do
-            @resource.ip_address.should be_nil
+            expect(@resource.ip_address).to be_nil
           end
         end
       end

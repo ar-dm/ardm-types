@@ -13,12 +13,12 @@ try_spec do
     describe '#valid?' do
       describe "with a String" do
         subject { @property.valid?(@input) }
-        it { subject.should be(true) }
+        it { expect(subject).to be(true) }
       end
 
       describe "with a UUIDTools::UUID" do
         subject { @property.valid?(@uuid) }
-        it { subject.should be(true) }
+        it { expect(subject).to be(true) }
       end
     end
   end
