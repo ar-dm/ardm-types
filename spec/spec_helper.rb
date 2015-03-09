@@ -13,18 +13,6 @@ Spec::Runner.configure do |config|
   config.extend(DataMapper::Spec::Adapters::Helpers)
 end
 
-DEPENDENCIES = {
-  'bcrypt' => 'bcrypt-ruby',
-}
-
 def try_spec
-  begin
     yield
-  rescue LoadError => error
-    raise error unless lib = error.message.match(/\Ano such file to load -- (.+)\z/)[1]
-
-    gem_location = DEPENDENCIES[lib] || raise("Unknown lib #{lib}")
-
-    warn "[WARNING] Skipping specs using #{lib}, please do: gem install #{gem_location}"
-  end
 end
