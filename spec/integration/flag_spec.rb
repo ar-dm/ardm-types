@@ -17,7 +17,7 @@ try_spec do
 
       describe 'with the default value' do
         it 'returns it as an array' do
-          expect(@resource.size).to eql([DataMapper::TypesFixtures::TShirt.properties[:size].default])
+          @resource.size.should eql([DataMapper::TypesFixtures::TShirt.properties[:size].default])
         end
       end
 
@@ -25,12 +25,12 @@ try_spec do
         describe 'dumped and loaded' do
           before do
             @resource.size = [ :xs, :medium ]
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'returns size as array' do
-            expect(@resource.size).to eq([ :xs, :medium ])
+            @resource.size.should == [ :xs, :medium ]
           end
         end
       end
@@ -42,12 +42,12 @@ try_spec do
 
         describe 'dumped and loaded' do
           before do
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'returns size as array with a single value' do
-            expect(@resource.size).to eq([:large])
+            @resource.size.should == [:large]
           end
         end
       end
@@ -55,16 +55,16 @@ try_spec do
       # Flag does not add any auto validations
       describe 'without size' do
         before do
-          expect(@resource).to be_valid
+          @resource.should be_valid
           @resource.size = nil
         end
 
         it 'is valid' do
-          expect(@resource).to be_valid
+          @resource.should be_valid
         end
 
         it 'has no errors' do
-          expect(@resource.errors).to be_empty
+          @resource.errors.should be_empty
         end
       end
     end

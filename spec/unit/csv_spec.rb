@@ -21,7 +21,7 @@ try_spec do
           end
 
           it 'parses the argument using CVS parser' do
-            expect(@result).to eq([ %w[ uno due tre ] ])
+            @result.should == [ %w[ uno due tre ] ]
           end
         end
 
@@ -32,7 +32,7 @@ try_spec do
           end
 
           it 'does not change the input' do
-            expect(@result).to eq(@input)
+            @result.should == @input
           end
         end
 
@@ -43,7 +43,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
 
@@ -54,7 +54,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
 
@@ -65,7 +65,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
 
@@ -76,7 +76,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
 
@@ -87,7 +87,7 @@ try_spec do
           end
 
           it 'returns input as is' do
-            expect(@result).to eql(@input)
+            @result.should eql(@input)
           end
         end
       end
@@ -100,7 +100,7 @@ try_spec do
           end
 
           it 'dumps value to comma separated string' do
-            expect(@result).to eq("uno,due,tre\nuno,dos,tres\n")
+            @result.should == "uno,due,tre\nuno,dos,tres\n"
           end
         end
 
@@ -111,7 +111,7 @@ try_spec do
           end
 
           it 'returns input as is' do
-            expect(@result).to eq(@input)
+            @result.should == @input
           end
         end
 
@@ -122,7 +122,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
 
@@ -133,7 +133,7 @@ try_spec do
           end
 
           it 'returns nil' do
-            expect(@result).to be_nil
+            @result.should be_nil
           end
         end
       end

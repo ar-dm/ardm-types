@@ -18,12 +18,12 @@ try_spec do
 
         describe 'when dumped and loaded again' do
           before :all do
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'has nil inventions list' do
-            expect(@resource.inventions).to be_nil
+            @resource.inventions.should be_nil
           end
         end
       end
@@ -38,12 +38,12 @@ try_spec do
 
         describe 'when dumped and loaded again' do
           before :all do
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'loads inventions list to the state when it was dumped/persisted with keys being strings' do
-            expect(@resource.inventions).to eq(@input)
+            @resource.inventions.should == @input
           end
         end
       end
@@ -55,12 +55,12 @@ try_spec do
 
         describe 'when dumped and loaded again' do
           before :all do
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'has empty inventions list' do
-            expect(@resource.inventions).to eq([])
+            @resource.inventions.should == []
           end
         end
       end
@@ -73,12 +73,12 @@ try_spec do
 
         describe 'when dumped and loaded again' do
           before :all do
-            expect(@resource.save).to be(true)
+            @resource.save.should be(true)
             @resource.reload
           end
 
           it 'has correct inventions' do
-            expect(@resource.inventions).to eq('Foo and Bar')
+            @resource.inventions.should == 'Foo and Bar'
           end
         end
       end

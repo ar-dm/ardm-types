@@ -17,11 +17,11 @@ try_spec do
         end
 
         it 'has slug equal to "new-datamapper-type"' do
-          expect(@resource.slug).to eq('new-datamapper-type')
+          @resource.slug.should == 'new-datamapper-type'
         end
 
         it 'can be found by slug' do
-          expect(DataMapper::TypesFixtures::Article.first(:slug => 'new-datamapper-type')).to eq(@resource)
+          DataMapper::TypesFixtures::Article.first(:slug => 'new-datamapper-type').should == @resource
         end
       end
 
@@ -42,21 +42,21 @@ try_spec do
           describe "set with title '#{title}'" do
             before :all do
               @resource = DataMapper::TypesFixtures::Article.new(:title => title)
-              expect(@resource.valid?).to be(true)
+              @resource.valid?.should be(true)
             end
 
             it "has slug equal to '#{slug}'" do
-              expect(@resource.slug).to eq(slug)
+              @resource.slug.should == slug
             end
 
             describe "and persisted" do
               before :all do
-                expect(@resource.save).to be(true)
+                @resource.save.should be(true)
                 @resource.reload
               end
 
               it 'can be found by slug' do
-                expect(DataMapper::TypesFixtures::Article.first(:slug => slug)).to eq(@resource)
+                DataMapper::TypesFixtures::Article.first(:slug => slug).should == @resource
               end
             end
           end

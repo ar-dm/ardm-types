@@ -15,8 +15,8 @@ try_spec do
       end
 
       it 'persists the password on initial save' do
-        expect(@resource.password).to       eq('DataMapper R0cks!')
-        expect(@people.last.password).to eq('password1')
+        @resource.password.should       == 'DataMapper R0cks!'
+        @people.last.password.should == 'password1'
       end
 
       it 'recalculates password hash on attribute update' do
@@ -24,23 +24,23 @@ try_spec do
         @resource.save
 
         @resource.reload
-        expect(@resource.password).to     eq('bcryptic obscure')
-        expect(@resource.password).not_to eq('DataMapper R0cks!')
+        @resource.password.should     == 'bcryptic obscure'
+        @resource.password.should_not == 'DataMapper R0cks!'
       end
 
       it 'does not change password value on reload' do
         resource = @people.last
         original = resource.password.to_s
         resource.reload
-        expect(resource.password.to_s).to eq(original)
+        resource.password.to_s.should == original
       end
 
       it 'uses cost of BCrypt::Engine::DEFAULT_COST' do
-        expect(@resource.password.cost).to eq(BCrypt::Engine::DEFAULT_COST)
+        @resource.password.cost.should == BCrypt::Engine::DEFAULT_COST
       end
 
       it 'allows Bcrypt::Password#hash to be an Integer' do
-        expect(@resource.password.hash).to be_kind_of(Integer)
+        @resource.password.hash.should be_kind_of(Integer)
       end
     end
   end

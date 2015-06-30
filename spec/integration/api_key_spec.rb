@@ -10,17 +10,17 @@ try_spec do
       let(:original_api_key) { subject.api_key }
 
       it "should have a default value" do
-        expect(original_api_key).not_to be_nil
+        original_api_key.should_not be_nil
       end
 
       it "should preserve the default value" do
-        expect(subject.api_key).to eq(original_api_key)
+        subject.api_key.should == original_api_key
       end
 
       it "should generate unique API Keys for each resource" do
         other_resource = described_class.new(:name => 'eve')
 
-        expect(other_resource.api_key).not_to eq(original_api_key)
+        other_resource.api_key.should_not == original_api_key
       end
     end
   end
