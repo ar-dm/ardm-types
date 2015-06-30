@@ -1,154 +1,152 @@
 require 'spec_helper'
 
-try_spec do
-  describe DataMapper::Property::BCryptHash do
-    before do
-      @clear_password   = 'DataMapper R0cks!'
-      @crypted_password = BCrypt::Password.create(@clear_password)
+describe DataMapper::Property::BCryptHash do
+  before do
+    @clear_password   = 'DataMapper R0cks!'
+    @crypted_password = BCrypt::Password.create(@clear_password)
 
-      @nonstandard_type = 1
+    @nonstandard_type = 1
 
-      class ::TestType
-        @a = 1
-        @b = 'Hi There'
-      end
-      @nonstandard_type2 = TestType.new
+    class ::TestType
+      @a = 1
+      @b = 'Hi There'
+    end
+    @nonstandard_type2 = TestType.new
 
-      class ::User
-        include DataMapper::Resource
-        property :id, Serial
-        property :password, BCryptHash
-      end
-
-      @bcrypt_hash = User.properties[:password]
+    class ::User
+      include DataMapper::Resource
+      property :id, Serial
+      property :password, BCryptHash
     end
 
-    describe '.dump' do
-      describe 'when argument is a string' do
-        before do
-          @input  = 'DataMapper'
-          @result = @bcrypt_hash.dump(@input)
-        end
+    @bcrypt_hash = User.properties[:password]
+  end
 
-        it 'returns instance of BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'returns a string that is 60 characters long' do
-          expect(@result.size).to eq(60)
-        end
+  describe '.dump' do
+    describe 'when argument is a string' do
+      before do
+        @input  = 'DataMapper'
+        @result = @bcrypt_hash.dump(@input)
       end
 
-      describe 'when argument is nil' do
-        before do
-          @input  = nil
-          @result = @bcrypt_hash.dump(@input)
-        end
+      it 'returns instance of BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
+      end
 
-        it 'returns nil' do
-          expect(@result).to be_nil
-        end
+      it 'returns a string that is 60 characters long' do
+        expect(@result.size).to eq(60)
       end
     end
 
-    describe '.load' do
-      describe 'when argument is a string' do
-        before do
-          @input  = 'DataMapper'
-          @result = @bcrypt_hash.load(@crypted_password)
-        end
-
-        it 'returns instance of BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'returns a string that matches original' do
-          expect(@result).to eq(@clear_password)
-        end
+    describe 'when argument is nil' do
+      before do
+        @input  = nil
+        @result = @bcrypt_hash.dump(@input)
       end
 
-      describe 'when argument is nil' do
-        before do
-          @input  = nil
-          @result = @bcrypt_hash.load(@input)
-        end
+      it 'returns nil' do
+        expect(@result).to be_nil
+      end
+    end
+  end
 
-        it 'returns nil' do
-          expect(@result).to be_nil
-        end
+  describe '.load' do
+    describe 'when argument is a string' do
+      before do
+        @input  = 'DataMapper'
+        @result = @bcrypt_hash.load(@crypted_password)
+      end
+
+      it 'returns instance of BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
+      end
+
+      it 'returns a string that matches original' do
+        expect(@result).to eq(@clear_password)
       end
     end
 
-    describe '.typecast' do
-      describe 'when argument is a string' do
-        before do
-          @input  = 'bcrypt hash'
-          @result = @bcrypt_hash.typecast(@input)
-        end
-
-        it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
-        end
+    describe 'when argument is nil' do
+      before do
+        @input  = nil
+        @result = @bcrypt_hash.load(@input)
       end
 
-      describe 'when argument is a blank string' do
-        before do
-          @input  = ''
-          @result = @bcrypt_hash.typecast(@input)
-        end
+      it 'returns nil' do
+        expect(@result).to be_nil
+      end
+    end
+  end
 
-        it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
-        end
+  describe '.typecast' do
+    describe 'when argument is a string' do
+      before do
+        @input  = 'bcrypt hash'
+        @result = @bcrypt_hash.typecast(@input)
       end
 
-      describe 'when argument is integer' do
-        before do
-          @input  = 2249
-          @result = @bcrypt_hash.typecast(@input)
-        end
-
-        it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
-        end
+      it 'casts argument to BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
       end
 
-      describe 'when argument is hash' do
-        before do
-          @input  = { :cryptic => 'obscure' }
-          @result = @bcrypt_hash.typecast(@input)
-        end
+      it 'casts argument to value that matches input' do
+        expect(@result).to eq(@input)
+      end
+    end
 
-        it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
-        end
-
-        it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
-        end
+    describe 'when argument is a blank string' do
+      before do
+        @input  = ''
+        @result = @bcrypt_hash.typecast(@input)
       end
 
-      describe 'when argument is nil' do
-        before do
-          @input  = nil
-          @result = @bcrypt_hash.typecast(@input)
-        end
+      it 'casts argument to BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
+      end
 
-        it 'returns nil' do
-          expect(@result).to be_nil
-        end
+      it 'casts argument to value that matches input' do
+        expect(@result).to eq(@input)
+      end
+    end
+
+    describe 'when argument is integer' do
+      before do
+        @input  = 2249
+        @result = @bcrypt_hash.typecast(@input)
+      end
+
+      it 'casts argument to BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
+      end
+
+      it 'casts argument to value that matches input' do
+        expect(@result).to eq(@input)
+      end
+    end
+
+    describe 'when argument is hash' do
+      before do
+        @input  = { :cryptic => 'obscure' }
+        @result = @bcrypt_hash.typecast(@input)
+      end
+
+      it 'casts argument to BCrypt::Password' do
+        expect(@result).to be_an_instance_of(BCrypt::Password)
+      end
+
+      it 'casts argument to value that matches input' do
+        expect(@result).to eq(@input)
+      end
+    end
+
+    describe 'when argument is nil' do
+      before do
+        @input  = nil
+        @result = @bcrypt_hash.typecast(@input)
+      end
+
+      it 'returns nil' do
+        expect(@result).to be_nil
       end
     end
   end

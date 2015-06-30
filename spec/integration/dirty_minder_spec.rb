@@ -1,17 +1,15 @@
 require 'spec_helper'
 
-try_spec do
-
-  # FIXME: DirtyMinder is currently unsupported on RBX, because unlike the other
-  # supported Rubies, RBX core class (e.g. Array, Hash) methods use #send().  In
-  # other words, the other Rubies don't use #send() (they map directly to their
-  # C functions).
-  #
-  # The current methodology takes advantage of this by using #send() to forward
-  # method invocations we've hooked.  Supporting RBX will require finding
-  # another way, possibly for all Rubies.  In the meantime, something is better
-  # than nothing.
-  next if defined?(RUBY_ENGINE) and RUBY_ENGINE == 'rbx'
+# FIXME: DirtyMinder is currently unsupported on RBX, because unlike the other
+# supported Rubies, RBX core class (e.g. Array, Hash) methods use #send().  In
+# other words, the other Rubies don't use #send() (they map directly to their
+# C functions).
+#
+# The current methodology takes advantage of this by using #send() to forward
+# method invocations we've hooked.  Supporting RBX will require finding
+# another way, possibly for all Rubies.  In the meantime, something is better
+# than nothing.
+unless defined?(RUBY_ENGINE) and RUBY_ENGINE == 'rbx'
 
   require './spec/fixtures/person'
 

@@ -1,67 +1,63 @@
 require 'spec_helper'
+require './spec/fixtures/person'
+require './spec/fixtures/invention'
 
-try_spec do
+describe DataMapper::TypesFixtures::Person do
+  supported_by :all do
+    before do
+      @resource = DataMapper::TypesFixtures::Person.new(:name => '')
+    end
 
-  require './spec/fixtures/person'
-  require './spec/fixtures/invention'
-
-  describe DataMapper::TypesFixtures::Person do
-    supported_by :all do
+    describe 'with no inventions information' do
       before do
-        @resource = DataMapper::TypesFixtures::Person.new(:name => '')
+        @resource.inventions = nil
       end
 
-      describe 'with no inventions information' do
+      describe 'when dumped and loaded again' do
         before do
-          @resource.inventions = nil
+          expect(@resource.save).to be(true)
+          @resource.reload
         end
 
-        describe 'when dumped and loaded again' do
-          before do
-            expect(@resource.save).to be(true)
-            @resource.reload
-          end
-
-          it 'has nil inventions list' do
-            expect(@resource.inventions).to be_nil
-          end
+        it 'has nil inventions list' do
+          expect(@resource.inventions).to be_nil
         end
       end
+    end
 
-      describe 'with a few items on the inventions list' do
-        before do
-          @input = [ 'carbon telephone transmitter', 'light bulb', 'electric grid' ].map do |name|
-            DataMapper::TypesFixtures::Invention.new(name)
-          end
-          @resource.inventions = @input
+    describe 'with a few items on the inventions list' do
+      before do
+        @input = [ 'carbon telephone transmitter', 'light bulb', 'electric grid' ].map do |name|
+          DataMapper::TypesFixtures::Invention.new(name)
         end
-
-        describe 'when dumped and loaded again' do
-          before do
-            expect(@resource.save).to be(true)
-            @resource.reload
-          end
-
-          it 'loads inventions list to the state when it was dumped/persisted with keys being strings' do
-            expect(@resource.inventions).to eq(@input)
-          end
-        end
+        @resource.inventions = @input
       end
 
-      describe 'with inventions information given as empty list' do
+      describe 'when dumped and loaded again' do
         before do
-          @resource.inventions = []
+          expect(@resource.save).to be(true)
+          @resource.reload
         end
 
-        describe 'when dumped and loaded again' do
-          before do
-            expect(@resource.save).to be(true)
-            @resource.reload
-          end
+        it 'loads inventions list to the state when it was dumped/persisted with keys being strings' do
+          expect(@resource.inventions).to eq(@input)
+        end
+      end
+    end
 
-          it 'has empty inventions list' do
-            expect(@resource.inventions).to eq([])
-          end
+    describe 'with inventions information given as empty list' do
+      before do
+        @resource.inventions = []
+      end
+
+      describe 'when dumped and loaded again' do
+        before do
+          expect(@resource.save).to be(true)
+          @resource.reload
+        end
+
+        it 'has empty inventions list' do
+          expect(@resource.inventions).to eq([])
         end
       end
     end

@@ -14,7 +14,3 @@ DataMapper::Spec.setup
 RSpec.configure do |config|
   config.extend(DataMapper::Spec::Adapters::Helpers)
 end
-
-def try_spec
-    yield
-end
