@@ -25,5 +25,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'uuidtools',   '~> 2.1'
 
   gem.add_development_dependency 'rake',  '~> 0.9'
-  gem.add_development_dependency 'rspec', '~> 3.2'
+  gem.add_development_dependency 'rspec', '~> 1.3'
 end

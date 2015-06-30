@@ -31,11 +31,11 @@ try_spec do
         end
 
         it 'returns instance of BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'returns a string that is 60 characters long' do
-          expect(@result.size).to eq(60)
+          @result.size.should == 60
         end
       end
 
@@ -46,7 +46,7 @@ try_spec do
         end
 
         it 'returns nil' do
-          expect(@result).to be_nil
+          @result.should be_nil
         end
       end
     end
@@ -59,11 +59,11 @@ try_spec do
         end
 
         it 'returns instance of BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'returns a string that matches original' do
-          expect(@result).to eq(@clear_password)
+          @result.should == @clear_password
         end
       end
 
@@ -74,7 +74,7 @@ try_spec do
         end
 
         it 'returns nil' do
-          expect(@result).to be_nil
+          @result.should be_nil
         end
       end
     end
@@ -87,11 +87,11 @@ try_spec do
         end
 
         it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
+          @result.should == @input
         end
       end
 
@@ -102,11 +102,11 @@ try_spec do
         end
 
         it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
+          @result.should == @input
         end
       end
 
@@ -117,11 +117,11 @@ try_spec do
         end
 
         it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
+          @result.should == @input
         end
       end
 
@@ -132,11 +132,11 @@ try_spec do
         end
 
         it 'casts argument to BCrypt::Password' do
-          expect(@result).to be_an_instance_of(BCrypt::Password)
+          @result.should be_an_instance_of(BCrypt::Password)
         end
 
         it 'casts argument to value that matches input' do
-          expect(@result).to eq(@input)
+          @result.should == @input
         end
       end
 
@@ -147,7 +147,7 @@ try_spec do
         end
 
         it 'returns nil' do
-          expect(@result).to be_nil
+          @result.should be_nil
         end
       end
     end

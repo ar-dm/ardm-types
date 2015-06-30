@@ -5,12 +5,11 @@ require 'dm-types'
 require 'dm-migrations'
 require 'dm-validations'
 
-require 'rspec'
-DataMapper::Spec.setup
-
 Dir["#{Pathname(__FILE__).dirname.expand_path}/shared/*.rb"].each { |file| require file }
 
-RSpec.configure do |config|
+DataMapper::Spec.setup
+
+Spec::Runner.configure do |config|
   config.extend(DataMapper::Spec::Adapters::Helpers)
 end
 

@@ -12,7 +12,7 @@ try_spec do
           @uuid        = UUIDTools::UUID.parse(@uuid_string)
           @resource    = DataMapper::TypesFixtures::NetworkNode.new(:uuid => @uuid)
 
-          expect(@resource.save).to be(true)
+          @resource.save.should be(true)
         end
 
         describe 'when reloaded' do
@@ -21,11 +21,11 @@ try_spec do
           end
 
           it 'has the same UUID string' do
-            expect(@resource.uuid.to_s).to eq(@uuid_string)
+            @resource.uuid.to_s.should == @uuid_string
           end
 
           it 'returns UUID as an object' do
-            expect(@resource.uuid).to be_an_instance_of(UUIDTools::UUID)
+            @resource.uuid.should be_an_instance_of(UUIDTools::UUID)
           end
         end
       end
@@ -42,11 +42,11 @@ try_spec do
           end
 
           it 'has the same UUID string' do
-            expect(@resource.uuid.to_s).to eq(@uuid)
+            @resource.uuid.to_s.should == @uuid
           end
 
           it 'returns UUID as an object' do
-            expect(@resource.uuid).to be_an_instance_of(UUIDTools::UUID)
+            @resource.uuid.should be_an_instance_of(UUIDTools::UUID)
           end
         end
       end
@@ -61,7 +61,7 @@ try_spec do
 
         describe 'when assigned UUID' do
           it 'raises ArgumentError' do
-            expect(@operation).to raise_error(ArgumentError, /Invalid UUID format/)
+            @operation.should raise_error(ArgumentError, /Invalid UUID format/)
           end
         end
       end
@@ -76,7 +76,7 @@ try_spec do
 
         describe 'when assigned UUID' do
           it 'raises ArgumentError' do
-            expect(@operation).to raise_error(ArgumentError, /Invalid UUID format/)
+            @operation.should raise_error(ArgumentError, /Invalid UUID format/)
           end
         end
       end
@@ -93,7 +93,7 @@ try_spec do
           end
 
           it 'has no UUID' do
-            expect(@resource.uuid).to be_nil
+            @resource.uuid.should be_nil
           end
         end
       end
